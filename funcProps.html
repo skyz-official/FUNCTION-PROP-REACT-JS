@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Function as Prop Example</title>
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding: 40px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: none;
+      background-color: #007BFF;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    //  Parent Component
+    function ParentComponent() {
+      function showAlert() {
+        alert("✅ Hello! I am a function from the parent.");
+      }
+
+      return (
+        <div>
+          <h1>Function as Prop Demo</h1>
+          <ChildComponent triggerFunction={showAlert} />
+        </div>
+      );
+    }
+
+    //  Child Component
+    function ChildComponent({ triggerFunction }) {
+      return (
+        <div>
+          <p>This button uses a function passed from the parent 👇</p>
+          <button onClick={triggerFunction}>Click Me</button>
+        </div>
+      );
+    }
+
+    // 🔁 Render the Parent into the DOM
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<ParentComponent />);
+  </script>
+</body>
+</html>
